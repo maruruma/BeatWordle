@@ -35,5 +35,6 @@ python main.py hoge.txt
 The word-list file must satisfy
 - all words have same # of letters
 - each words are separated by a line feed charactor.
+
 See this format.
 https://gist.github.com/cfreshman/dec102adb5e60a8299857cbf78f6cf57
