@@ -36,15 +36,23 @@ class BeatWordle:
         print("word: judge, answer:judge" + self.dictionary['judge_judge'])"""
 
     def judge_word(self, word, answer):
-        letter_state = ""
+        letter_state = ['N'] * self.NUM_OF_LETTERS
+        remaining_counts = {}
+
         for i in range(self.NUM_OF_LETTERS):
             if word[i] == answer[i]:
-                letter_state = letter_state + 'B'
-            elif word[i] in answer:
-                letter_state = letter_state + 'H'
+                letter_state[i] = 'B'
             else:
-                letter_state = letter_state + 'N'
-        return letter_state
+                remaining_counts[answer[i]] = remaining_counts.get(answer[i], 0) + 1
+
+        for i in range(self.NUM_OF_LETTERS):
+            if letter_state[i] == 'B':
+                continue
+            if remaining_counts.get(word[i], 0) > 0:
+                letter_state[i] = 'H'
+                remaining_counts[word[i]] -= 1
+
+        return ''.join(letter_state)
 
     def main_logic(self):
         while True:
